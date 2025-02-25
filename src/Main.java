@@ -1,12 +1,10 @@
-import UI.MainMenuUI;
-import datastorage.Reservations;
-import reservations.Reservation;
-import workplaces.Workplace;
+import UI.MainMethodsMenu;
+import UI.interfaces.MethodsMenu;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world");
-        MainMenuUI mainMenuUI = new MainMenuUI();
-        mainMenuUI.printAllMethods();
+        MethodsMenu menu = new MainMethodsMenu();
+        menu.printAllMethods();
+        menu.selectMethod();
     }
 }
