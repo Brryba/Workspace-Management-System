@@ -1,10 +1,10 @@
 package datastorage;
 
-import workplaces.Workplace;
+import services.workspaces.Workspace;
 
 import java.util.ArrayList;
 
-public class Workplaces extends ArrayList<Workplace> {
+public class Workspaces extends ArrayList<Workspace> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

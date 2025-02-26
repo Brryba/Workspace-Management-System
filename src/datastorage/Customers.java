@@ -1,6 +1,6 @@
 package datastorage;
 
-import users.Customer;
+import services.users.Customer;
 
 import java.util.ArrayList;
 

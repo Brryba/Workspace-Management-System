@@ -1,34 +1,36 @@
 package UI;
 
-import UI.interfaces.Callable;
+import UI.interfaces.Applyable;
+import datastorage.MainStorage;
 
 import java.util.LinkedHashMap;
-import java.util.Scanner;
 
-public abstract class AbstractMethodsMenu extends LinkedHashMap<Integer, Callable>
+public abstract class AbstractMethodsMenu
         implements UI.interfaces.MethodsMenu {
-    private Scanner scanner;
+    public static final int QUIT_MENU_METHOD = 0;
+    protected final LinkedHashMap<Integer, Applyable> map = new LinkedHashMap<>();
     private void printAllMethods() {
-        for (int key : this.keySet()) {
-            System.out.println(key + " - " + this.get(key).toString());
+        for (int key : map.keySet()) {
+            System.out.println(key + " - " + map.get(key).getMethodName());
         }
     }
 
-    private Callable selectMethod() {
+    private int selectMethod() {
         System.out.println("Enter your option here:");
-        return this.get(scanner.nextInt());
+        return Integer.parseInt(MainStorage.scanner.nextLine());
+    }
+
+    public void addMethod(int methodID, Applyable method) {
+        this.map.put(methodID, method);
     }
 
     @Override
     public void showMenu() {
-        scanner = new Scanner(System.in);
-        Callable method;
-
+        int methodID;
         do {
             printAllMethods();
-            method = selectMethod();
-            method.call();
-        } while (!(method instanceof Quit));
-        scanner.close();
+            methodID = selectMethod();
+            map.get(methodID).apply();
+        } while (methodID != QUIT_MENU_METHOD);
     }
 }

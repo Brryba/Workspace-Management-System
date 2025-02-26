@@ -1,12 +1,12 @@
-package workplaces;
+package services.workspaces;
 
 import java.math.BigDecimal;
 
-public class Workplace {
+public class Workspace {
     private int ID;
     private String type;
     private BigDecimal price;
-    private boolean isAvailable;
+    private boolean isAvailable = true;
 
     public void setID(int ID) {
         this.ID = ID;
@@ -26,6 +26,9 @@ public class Workplace {
 
     public void setAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+    public boolean isAvailable() {
+        return this.isAvailable;
     }
 
     @Override

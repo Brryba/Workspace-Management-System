@@ -1,63 +1,51 @@
 package UI;
 
-import UI.interfaces.Callable;
-import users.Customer;
+import UI.interfaces.Applyable;
+import services.workspaces.AvailableSpacesViewer;
 
-public class CustomerMethodsMenu extends AbstractMethodsMenu{
+public class CustomerMethodsMenu extends UI.AbstractMethodsMenu {
     public CustomerMethodsMenu() {
         super();
-        this.put(1, new AvailableSpacesBrowser());
-        this.put(2, new ReservationMaker());
-        this.put(3, new CustomerReservationViewer());
-        this.put(4, new ReservationCanceler());
-        this.put(0, new Quit());
+        this.addMethod(1, new AvailableSpacesViewer());
+        this.addMethod(2, new ReservationMaker());
+        this.addMethod(3, new CustomerReservationViewer());
+        this.addMethod(4, new ReservationCanceler());
+        this.addMethod(AbstractMethodsMenu.QUIT_MENU_METHOD, new MainMenuOpener());
     }
 }
 
-class AvailableSpacesBrowser implements Callable {
+class ReservationMaker implements Applyable {
     @Override
-    public void call() {
-        System.out.println("Add space");
-    }
-
-    @Override
-    public String toString() {
-        return "Browse available spaces";
-    }
-}
-
-class ReservationMaker implements Callable {
-    @Override
-    public void call() {
+    public void apply() {
         System.out.println("Remove space");
     }
 
     @Override
-    public String toString() {
+    public String getMethodName() {
         return "Make a reservation";
     }
 }
 
-class CustomerReservationViewer implements Callable {
+class CustomerReservationViewer implements Applyable {
     @Override
-    public void call() {
+    public void apply() {
         System.out.println("Add space");
     }
 
     @Override
-    public String toString() {
-        return "View my reservations";
+    public String getMethodName() {
+        return "View my services.reservations";
     }
 }
 
-class ReservationCanceler implements Callable {
+class ReservationCanceler implements Applyable {
     @Override
-    public void call() {
+    public void apply() {
         System.out.println("Add space");
     }
 
     @Override
-    public String toString() {
+    public String getMethodName() {
         return "Cancel a reservation";
     }
 }

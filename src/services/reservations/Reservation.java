@@ -1,19 +1,19 @@
-package reservations;
+package services.reservations;
 
-import users.User;
-import workplaces.Workplace;
+import services.users.User;
+import services.workspaces.Workspace;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Reservation {
     private User user;
-    private Workplace workplace;
+    private Workspace workplace;
     private LocalDateTime start;
     private LocalDateTime end;
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-    public Reservation(User user, Workplace workplace) {
+    public Reservation(User user, Workspace workplace) {
         this.user = user;
         this.workplace = workplace;
         workplace.setAvailable(false);

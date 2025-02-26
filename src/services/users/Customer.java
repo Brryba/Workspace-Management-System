@@ -1,4 +1,4 @@
-package users;
+package services.users;
 
 public class Customer extends User {
     private String name;

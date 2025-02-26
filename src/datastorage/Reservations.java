@@ -1,6 +1,6 @@
 package datastorage;
 
-import reservations.Reservation;
+import services.reservations.Reservation;
 
 import java.util.ArrayList;
 
