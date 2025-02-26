@@ -1,21 +1,21 @@
 package services.reservations;
 
-import services.users.User;
+import services.customer.Customer;
 import services.workspaces.Workspace;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Reservation {
-    private User user;
-    private Workspace workplace;
+    private final Customer customer;
+    private final Workspace workspace;
     private LocalDateTime start;
     private LocalDateTime end;
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-    public Reservation(User user, Workspace workplace) {
-        this.user = user;
-        this.workplace = workplace;
+    public Reservation(Customer customer, Workspace workplace) {
+        this.customer = customer;
+        this.workspace = workplace;
         workplace.setAvailable(false);
     }
 
@@ -32,9 +32,17 @@ public class Reservation {
         this.end = parseDateTime(date, time);
     }
 
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
+    public Workspace getWorkspace() {
+        return this.workspace;
+    }
+
     @Override
     public String toString() {
-        return "Workplace ID: " + this.workplace.getID() +
+        return "Workplace ID: " + this.workspace.getID() +
                 "\nStart Time:" + start.format(dateTimeFormatter) +
                 "\nEnd Time:" + end.format(dateTimeFormatter);
     }

@@ -1,4 +1,4 @@
-import UI.MainMethodsMenu;
+import UI.menus.MainMethodsMenu;
 import UI.interfaces.MethodsMenu;
 
 public class Main {

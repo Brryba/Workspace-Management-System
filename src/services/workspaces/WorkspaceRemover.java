@@ -1,15 +1,15 @@
 package services.workspaces;
 
 import UI.interfaces.Applyable;
-import datastorage.MainStorage;
-import datastorage.Workspaces;
+import data_storage.MainStorage;
+import data_storage.Workspaces;
 
 public class WorkspaceRemover implements Applyable {
     @Override
     public void apply() {
         Workspaces workplacesList = MainStorage.workspaces;
         System.out.println(workplacesList.toString());
-        workplacesList.remove(Integer.parseInt(MainStorage.scanner.nextLine()) - 1);
+        workplacesList.remove(MainStorage.scanner.readInt() - 1);
     }
 
     @Override

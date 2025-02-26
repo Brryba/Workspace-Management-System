@@ -1,6 +1,6 @@
-package services.users;
+package services.customer;
 
-public class Customer extends User {
+public class Customer {
     private String name;
 
     public String getName() {

@@ -1,6 +1,7 @@
 package services.workspaces;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Workspace {
     private int ID;
@@ -21,7 +22,7 @@ public class Workspace {
     }
 
     public void setPrice(double price) {
-        this.price = new BigDecimal(price);
+        this.price = new BigDecimal(price).setScale(2, RoundingMode.HALF_DOWN);
     }
 
     public void setAvailable(boolean isAvailable) {
@@ -36,6 +37,6 @@ public class Workspace {
         return "Workplace ID: " + this.ID +
                 "\nType: " + this.type +
                 "\nPrice: " + this.price +
-                "\nAvailability Status: " + (isAvailable ? "Available" : "Not Available");
+                "\nAvailability Status: " + (isAvailable ? "Available" : "Not Available\n");
     }
 }

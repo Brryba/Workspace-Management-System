@@ -1,11 +1,10 @@
 package services.workspaces;
 
 import UI.interfaces.Applyable;
-import datastorage.MainStorage;
-import datastorage.Workspaces;
+import data_storage.MainStorage;
+import data_storage.Workspaces;
 
 public class AvailableSpacesViewer implements Applyable {
-
     @Override
     public void apply() {
         Workspaces workspacesList = MainStorage.workspaces;

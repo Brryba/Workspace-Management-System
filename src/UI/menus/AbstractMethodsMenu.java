@@ -1,7 +1,7 @@
-package UI;
+package UI.menus;
 
 import UI.interfaces.Applyable;
-import datastorage.MainStorage;
+import data_storage.MainStorage;
 
 import java.util.LinkedHashMap;
 
@@ -17,7 +17,7 @@ public abstract class AbstractMethodsMenu
 
     private int selectMethod() {
         System.out.println("Enter your option here:");
-        return Integer.parseInt(MainStorage.scanner.nextLine());
+        return Integer.parseInt(MainStorage.scanner.readString());
     }
 
     public void addMethod(int methodID, Applyable method) {

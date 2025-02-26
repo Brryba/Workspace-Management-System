@@ -1,9 +1,11 @@
-package datastorage;
+package data_storage;
+
+import UI.utilities.ConsoleScanner;
 
 import java.util.Scanner;
 
 public abstract class MainStorage {
-    public static Scanner scanner = new Scanner(System.in);
+    public static ConsoleScanner scanner = new ConsoleScanner();
     public static Customers customers = new Customers();
     public static Reservations reservations = new Reservations();
     public static Workspaces workspaces = new Workspaces();

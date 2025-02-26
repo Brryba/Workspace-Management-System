@@ -1,4 +1,4 @@
-package datastorage;
+package data_storage;
 
 import services.reservations.Reservation;
 

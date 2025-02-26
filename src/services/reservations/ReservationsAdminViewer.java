@@ -1,7 +1,7 @@
 package services.reservations;
 
 import UI.interfaces.Applyable;
-import datastorage.MainStorage;
+import data_storage.MainStorage;
 
 public class ReservationsAdminViewer implements Applyable {
     @Override
@@ -11,6 +11,6 @@ public class ReservationsAdminViewer implements Applyable {
 
     @Override
     public String getMethodName() {
-        return "View all services.reservations";
+        return "View all reservations";
     }
 }
