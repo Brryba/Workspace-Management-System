@@ -1,19 +1,28 @@
 package UI.menus;
 
-import UI.menu_openers.MainMenuOpener;
+import UI.interfaces.Applyable;
+import UI.interfaces.MethodsMenu;
+import data_storage.MainStorage;
 import services.workspaces.Workspace;
-import services.workspaces.updates.WorkspaceAvailabilityUpdater;
-import services.workspaces.updates.WorkspaceIDUpdater;
-import services.workspaces.updates.WorkspacePriceUpdater;
-import services.workspaces.updates.WorkspaceTypeUpdater;
+import services.workspaces.updaters.WorkspaceAvailabilityUpdater;
+import services.workspaces.updaters.WorkspaceIDUpdater;
+import services.workspaces.updaters.WorkspacePriceUpdater;
+import services.workspaces.updaters.WorkspaceTypeUpdater;
 
-public class WorkspaceUpdateMenu extends AbstractMethodsMenu {
-    public WorkspaceUpdateMenu(Workspace workspace) {
-        super();
+public class WorkspaceUpdateMenu extends AbstractMenu implements Applyable, MethodsMenu {
+    @Override
+    protected void setMethods() {
+        Workspace workspace = MainStorage.workspaces.
+                getWorkspaceByID(MainStorage.scanner.readWorkspaceID());
         this.addMethod(1, new WorkspaceIDUpdater(workspace));
         this.addMethod(2, new WorkspaceTypeUpdater(workspace));
         this.addMethod(3, new WorkspacePriceUpdater(workspace));
         this.addMethod(4, new WorkspaceAvailabilityUpdater(workspace));
-        this.addMethod(AbstractMethodsMenu.QUIT_MENU_METHOD, new MainMenuOpener());
+        this.addMethod(AbstractMenu.QUIT_MENU_METHOD, new MainMenu());
+    }
+
+    @Override
+    public String getMethodName() {
+        return "Change workspace data";
     }
 }

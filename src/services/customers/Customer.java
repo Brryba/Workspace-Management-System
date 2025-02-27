@@ -1,4 +1,4 @@
-package services.customer;
+package services.customers;
 
 public class Customer {
     private String name;

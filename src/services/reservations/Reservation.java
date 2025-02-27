@@ -1,6 +1,6 @@
 package services.reservations;
 
-import services.customer.Customer;
+import services.customers.Customer;
 import services.workspaces.Workspace;
 
 import java.time.LocalDateTime;
@@ -43,12 +43,12 @@ public class Reservation {
     @Override
     public String toString() {
         return "Workplace ID: " + this.workspace.getID() +
-                "\nStart Time:" + start.format(dateTimeFormatter) +
-                "\nEnd Time:" + end.format(dateTimeFormatter);
+                "\nStart Time: " + start.format(dateTimeFormatter) +
+                "\nEnd Time: " + end.format(dateTimeFormatter);
     }
 
     public String toStringAdmin() {
-        return "User ID:" + 0 +
-                "\n" + this.toString();
+        return "Customer Name:" + this.customer.getName() +
+                "\n" + this;
     }
 }

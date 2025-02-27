@@ -1,6 +1,6 @@
 package data_storage;
 
-import services.customer.Customer;
+import services.customers.Customer;
 
 import java.util.ArrayList;
 

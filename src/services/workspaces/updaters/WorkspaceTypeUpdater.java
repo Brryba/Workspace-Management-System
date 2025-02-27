@@ -1,10 +1,10 @@
-package services.workspaces.updates;
+package services.workspaces.updaters;
 
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
 import services.workspaces.Workspace;
 
-public class WorkspaceTypeUpdater extends WorkplaceUpdater implements Applyable {
+public class WorkspaceTypeUpdater extends AbstractWorkplaceUpdater implements Applyable {
     public WorkspaceTypeUpdater(Workspace workspace) {
         super(workspace);
     }

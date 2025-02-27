@@ -1,4 +1,4 @@
-package services.customer;
+package services.customers;
 
 import data_storage.Customers;
 import data_storage.MainStorage;

@@ -3,10 +3,10 @@ package services.workspaces;
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
 import data_storage.Workspaces;
-import services.workspaces.updates.WorkspaceAvailabilityUpdater;
-import services.workspaces.updates.WorkspaceIDUpdater;
-import services.workspaces.updates.WorkspacePriceUpdater;
-import services.workspaces.updates.WorkspaceTypeUpdater;
+import services.workspaces.updaters.WorkspaceAvailabilityUpdater;
+import services.workspaces.updaters.WorkspaceIDUpdater;
+import services.workspaces.updaters.WorkspacePriceUpdater;
+import services.workspaces.updaters.WorkspaceTypeUpdater;
 
 public class WorkspaceCreator implements Applyable {
     private Workspace assignWorkPlace() {

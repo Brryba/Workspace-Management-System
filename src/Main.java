@@ -1,9 +1,9 @@
-import UI.menus.MainMethodsMenu;
-import UI.interfaces.MethodsMenu;
+import UI.menus.AbstractMenu;
+import UI.menus.MainMenu;
 
 public class Main {
     public static void main(String[] args) {
-        MethodsMenu menu = new MainMethodsMenu();
-        menu.showMenu();
+        AbstractMenu menu = new MainMenu();
+        menu.apply();
     }
 }

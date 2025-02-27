@@ -14,6 +14,15 @@ public class Workspaces extends ArrayList<Workspace> {
         return null;
     }
 
+    public boolean containsWorkspace(int workspaceID) {
+        for (Workspace workspace : this) {
+            if (workspace.getID() == workspaceID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

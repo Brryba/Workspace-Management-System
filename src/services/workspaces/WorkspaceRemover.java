@@ -9,7 +9,10 @@ public class WorkspaceRemover implements Applyable {
     public void apply() {
         Workspaces workplacesList = MainStorage.workspaces;
         System.out.println(workplacesList.toString());
-        workplacesList.remove(MainStorage.scanner.readInt() - 1);
+        System.out.println("Select workplace ID:");
+
+        Workspace workspace = workplacesList.getWorkspaceByID(MainStorage.scanner.readWorkspaceID());
+        workplacesList.remove(workspace);
     }
 
     @Override

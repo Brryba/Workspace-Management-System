@@ -4,8 +4,11 @@ import UI.interfaces.Applyable;
 import data_storage.MainStorage;
 import data_storage.Reservations;
 import data_storage.Workspaces;
-import services.customer.Customer;
+import services.customers.Customer;
 import services.workspaces.AvailableSpacesViewer;
+import services.workspaces.Workspace;
+
+import java.time.DateTimeException;
 
 public class ReservationMaker implements Applyable {
     private final Customer customer;
@@ -13,7 +16,7 @@ public class ReservationMaker implements Applyable {
         this.customer = customer;
     }
 
-    private void setReservationDateTime(Reservation reservation) {
+    private void setReservationDateTime(Reservation reservation) throws DateTimeException {
         System.out.println("Enter reservation start date in dd-mm-yyyy format:");
         String startDate = MainStorage.scanner.readString();
 
@@ -35,14 +38,20 @@ public class ReservationMaker implements Applyable {
         Workspaces workspacesList = MainStorage.workspaces;
 
         new AvailableSpacesViewer().apply();
-        System.out.println("Enter workspace ID from the list:");
 
+        Workspace workspace = workspacesList.getWorkspaceByID(MainStorage.scanner.readWorkspaceID());
         Reservation reservation = new Reservation(this.customer,
-                workspacesList.getWorkspaceByID(MainStorage.scanner.readInt()));
+                workspace);
 
 
-        setReservationDateTime(reservation);
-        reservationsList.add(reservation);
+        try {
+            setReservationDateTime(reservation);
+            reservationsList.add(reservation);
+            workspace.setAvailable(false);
+        } catch (DateTimeException e) {
+            System.err.println("Wrong date-time input! Reservation was not done!");
+            workspace.setAvailable(true);
+        }
     }
 
 

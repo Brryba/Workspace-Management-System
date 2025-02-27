@@ -3,10 +3,10 @@ package services.reservations;
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
 import data_storage.Reservations;
-import services.customer.Customer;
+import services.customers.Customer;
 
 public class ReservationCustomerViewer implements Applyable {
-    private Customer customer;
+    private final Customer customer;
     public ReservationCustomerViewer(Customer customer) {
         this.customer = customer;
     }

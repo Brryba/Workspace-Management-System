@@ -1,10 +1,10 @@
-package services.workspaces.updates;
+package services.workspaces.updaters;
 
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
 import services.workspaces.Workspace;
 
-public class WorkspacePriceUpdater extends WorkplaceUpdater implements Applyable {
+public class WorkspacePriceUpdater extends AbstractWorkplaceUpdater implements Applyable {
     public WorkspacePriceUpdater(Workspace workspace) {
         super(workspace);
     }

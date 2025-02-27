@@ -2,8 +2,6 @@ package data_storage;
 
 import UI.utilities.ConsoleScanner;
 
-import java.util.Scanner;
-
 public abstract class MainStorage {
     public static ConsoleScanner scanner = new ConsoleScanner();
     public static Customers customers = new Customers();
