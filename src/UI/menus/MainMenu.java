@@ -1,6 +1,7 @@
 package UI.menus;
 
 import UI.interfaces.Applyable;
+import file_utils.WorkspacesFileSaver;
 
 public class MainMenu extends AbstractMenu implements Applyable {
     @Override
@@ -18,7 +19,7 @@ public class MainMenu extends AbstractMenu implements Applyable {
 class Quit implements Applyable {
     @Override
     public void apply() {
-        System.out.println("Quit");
+        WorkspacesFileSaver.save(System.getProperty("user.dir") + "/workspaces.txt");
     }
 
     @Override

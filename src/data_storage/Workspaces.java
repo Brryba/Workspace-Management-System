@@ -2,9 +2,10 @@ package data_storage;
 
 import services.workspaces.Workspace;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Workspaces extends ArrayList<Workspace> {
+public class Workspaces extends ArrayList<Workspace> implements Serializable {
     public Workspace getWorkspaceByID(int workspaceID) {
         for (Workspace workspace : this) {
             if (workspace.getID() == workspaceID) {
