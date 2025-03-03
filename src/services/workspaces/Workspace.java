@@ -1,9 +1,10 @@
 package services.workspaces;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Workspace {
+public class Workspace implements Serializable {
     private int ID;
     private String type;
     private BigDecimal price;
