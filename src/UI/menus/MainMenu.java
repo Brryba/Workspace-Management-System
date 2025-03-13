@@ -17,9 +17,10 @@ public class MainMenu extends AbstractMenu implements Applyable {
 }
 
 class Quit implements Applyable {
+    private static final String DEFAULT_FILE_NAME = "/workspaces.ws";
     @Override
     public void apply() {
-        WorkspacesFileSaver.save(System.getProperty("user.dir") + "/workspaces.txt");
+        WorkspacesFileSaver.save(System.getProperty("user.dir") + DEFAULT_FILE_NAME);
     }
 
     @Override

@@ -8,11 +8,9 @@ public class AvailableSpacesViewer implements Applyable {
     @Override
     public void apply() {
         Workspaces workspacesList = MainStorage.workspaces;
-        for (Workspace workspace : workspacesList) {
-            if (workspace.isAvailable()) {
-                System.out.println(workspace);
-            }
-        }
+        workspacesList.stream()
+                .filter(Workspace::isAvailable)
+                .forEach(System.out::println);
     }
 
     @Override

@@ -7,21 +7,14 @@ import java.util.ArrayList;
 
 public class Workspaces extends ArrayList<Workspace> implements Serializable {
     public Workspace getWorkspaceByID(int workspaceID) {
-        for (Workspace workspace : this) {
-            if (workspace.getID() == workspaceID) {
-                return workspace;
-            }
-        }
-        return null;
+        return this.stream()
+                .filter(workspace -> workspace.getID() == workspaceID)
+                .findAny().orElse(null);
     }
 
     public boolean containsWorkspace(int workspaceID) {
-        for (Workspace workspace : this) {
-            if (workspace.getID() == workspaceID) {
-                return true;
-            }
-        }
-        return false;
+        return this.stream()
+                .anyMatch(workspace -> workspace.getID() == workspaceID);
     }
 
     @Override
