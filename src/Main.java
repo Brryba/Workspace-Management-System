@@ -6,9 +6,10 @@ import file_utils.WorkspacesFileOpener;
 import file_utils.WorkspacesNotFoundException;
 
 public class Main {
+    private static final String DEFAULT_FILE_NAME = "/workspaces.ws";
     private static void initializeWorkspaces() {
         try {
-            MainStorage.workspaces = WorkspacesFileOpener.open(System.getProperty("user.dir") + "/workspaces.txt");
+            MainStorage.workspaces = WorkspacesFileOpener.open(System.getProperty("user.dir") + DEFAULT_FILE_NAME);
         } catch (WorkspacesNotFoundException e) {
             MainStorage.workspaces = new Workspaces();
         }
