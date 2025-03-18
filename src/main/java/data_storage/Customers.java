@@ -11,12 +11,10 @@ public class Customers extends ArrayList<Customer> {
                 .filter(customer -> customer.getName().equals(name))
                 .findAny();
 
-        if (optionalCustomer.isPresent()) {
-            return optionalCustomer.get();
-        }
-
-        Customer newCustomer = new Customer(name);
-        this.add(newCustomer);
-        return newCustomer;
+        return optionalCustomer.orElseGet(() -> {
+            Customer newCustomer = new Customer(name);
+            this.add(newCustomer);
+            return newCustomer;
+        });
     }
 }
