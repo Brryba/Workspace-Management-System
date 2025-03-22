@@ -2,6 +2,7 @@ package UI.menus;
 
 import UI.interfaces.Applyable;
 import file_utils.WorkspacesFileSaver;
+import repository.DataBaseConnector;
 
 public class MainMenu extends AbstractMenu implements Applyable {
     @Override
@@ -21,6 +22,7 @@ class Quit implements Applyable {
     @Override
     public void apply() {
         WorkspacesFileSaver.save(System.getProperty("user.dir") + DEFAULT_FILE_NAME);
+        DataBaseConnector.getInstance().closeConnection();
     }
 
     @Override

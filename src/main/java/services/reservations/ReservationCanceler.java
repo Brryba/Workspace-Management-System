@@ -3,12 +3,11 @@ package services.reservations;
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
 import data_storage.Reservations;
-import services.customers.Customer;
 
 public class ReservationCanceler implements Applyable {
-    private final Customer customer;
-    public ReservationCanceler(Customer customer) {
-        this.customer = customer;
+    private final String customerName;
+    public ReservationCanceler(String customerName) {
+        this.customerName = customerName;
     }
 
     private int readReservationNum() {
@@ -20,7 +19,7 @@ public class ReservationCanceler implements Applyable {
     public void apply() {
         Reservations reservationsList = MainStorage.reservations;
         System.out.println("Your reservations:");
-        new ReservationCustomerViewer(customer).apply();
+        new ReservationCustomerViewer(customerName).apply();
         int reservationNum = readReservationNum();
 
         if (reservationNum >= 0 && reservationNum < reservationsList.size()) {

@@ -3,12 +3,11 @@ package services.reservations;
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
 import data_storage.Reservations;
-import services.customers.Customer;
 
 public class ReservationCustomerViewer implements Applyable {
-    private final Customer customer;
-    public ReservationCustomerViewer(Customer customer) {
-        this.customer = customer;
+    private final String customerName;
+    public ReservationCustomerViewer(String customerName) {
+        this.customerName = customerName;
     }
 
     @Override
@@ -16,7 +15,7 @@ public class ReservationCustomerViewer implements Applyable {
         Reservations reservationsList = MainStorage.reservations;
         int count = 1;
         for (Reservation reservation : reservationsList) {
-            if (reservation.getCustomer() == customer) {
+            if (reservation.getCustomerName() == customerName) {
                 System.out.println(count++ + ") " + reservation);
             }
         }

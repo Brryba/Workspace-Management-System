@@ -4,15 +4,14 @@ import UI.interfaces.Applyable;
 import data_storage.MainStorage;
 import data_storage.Reservations;
 import data_storage.Workspaces;
-import services.customers.Customer;
 import services.workspaces.AvailableSpacesViewer;
 import services.workspaces.Workspace;
 
 import java.time.DateTimeException;
 
 public class ReservationMaker implements Applyable {
-    private final Customer customer;
-    public ReservationMaker(Customer customer) {
+    private final String customer;
+    public ReservationMaker(String customer) {
         this.customer = customer;
     }
 
