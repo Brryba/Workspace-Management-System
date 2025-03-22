@@ -9,7 +9,7 @@ public class DataBaseConnector {
 
     private final String URL = "jdbc:mysql://localhost:3306/workspacemanagement";
     private final String USER = "root";
-    private final String PASS = System.getenv("DB_PASSWORD");
+    private final String PASS = "admin";
     private Connection connection;
 
     public static DataBaseConnector getInstance() {

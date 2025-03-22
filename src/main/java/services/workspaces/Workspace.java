@@ -18,12 +18,24 @@ public class Workspace implements Serializable {
         return this.ID;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
 
     public void setPrice(double price) {
         this.price = new BigDecimal(price).setScale(2, RoundingMode.HALF_DOWN);
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price.setScale(2, RoundingMode.HALF_DOWN);
     }
 
     public void setAvailable(boolean isAvailable) {

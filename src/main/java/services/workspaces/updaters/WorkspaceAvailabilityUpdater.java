@@ -2,11 +2,10 @@ package services.workspaces.updaters;
 
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
-import services.workspaces.Workspace;
 
 public class WorkspaceAvailabilityUpdater extends AbstractWorkplaceUpdater implements Applyable {
-    public WorkspaceAvailabilityUpdater(Workspace workspace) {
-        super(workspace);
+    public WorkspaceAvailabilityUpdater(int workspaceID) {
+        super(workspaceID);
     }
 
     @Override
@@ -19,7 +18,7 @@ public class WorkspaceAvailabilityUpdater extends AbstractWorkplaceUpdater imple
                 System.err.println("Select Y or N");
             }
         } while (!input.equals("Y") && !input.equals("N"));
-        this.workspace.setAvailable((input.equals("Y")));
+        workspaceRepository.updateAvailable(this.workspaceID, input.equals("Y"));
     }
 
     @Override

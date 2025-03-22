@@ -1,11 +1,12 @@
 package services.workspaces.updaters;
 
 import UI.interfaces.Applyable;
-import services.workspaces.Workspace;
+import repository.WorkspaceRepository;
 
 public abstract class AbstractWorkplaceUpdater implements Applyable {
-    protected final Workspace workspace;
-    public AbstractWorkplaceUpdater(Workspace workspace) {
-        this.workspace = workspace;
+    protected final int workspaceID;
+    protected final WorkspaceRepository workspaceRepository = WorkspaceRepository.getInstance();
+    public AbstractWorkplaceUpdater(int workspaceID) {
+        this.workspaceID = workspaceID;
     }
 }

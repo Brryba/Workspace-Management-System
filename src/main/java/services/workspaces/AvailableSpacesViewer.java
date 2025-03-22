@@ -1,13 +1,15 @@
 package services.workspaces;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
 import data_storage.Workspaces;
+import repository.WorkspaceRepository;
 
 public class AvailableSpacesViewer implements Applyable {
+    private final WorkspaceRepository repository = WorkspaceRepository.getInstance();
+
     @Override
     public void apply() {
-        Workspaces workspacesList = MainStorage.workspaces;
+        Workspaces workspacesList = repository.getAllWorkspaces();
         workspacesList.stream()
                 .filter(Workspace::isAvailable)
                 .forEach(System.out::println);

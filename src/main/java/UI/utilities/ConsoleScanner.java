@@ -1,11 +1,13 @@
 package UI.utilities;
 
 import data_storage.MainStorage;
+import repository.WorkspaceRepository;
 
 import java.util.Scanner;
 
 public class ConsoleScanner {
     private final Scanner scanner = new Scanner(System.in);
+    private final WorkspaceRepository workspaceRepository = WorkspaceRepository.getInstance();
 
     public int readInt() {
         int input;
@@ -23,7 +25,7 @@ public class ConsoleScanner {
         System.out.println("Select workspace ID:");
         do {
             int workspaceID = MainStorage.scanner.readInt();
-            if (MainStorage.workspaces.containsWorkspace(workspaceID)) {
+            if (workspaceRepository.containsID(workspaceID)) {
                 return workspaceID;
             } else {
                 System.err.println("No such workspace! Try again:");

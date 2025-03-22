@@ -2,17 +2,16 @@ package services.workspaces.updaters;
 
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
-import services.workspaces.Workspace;
 
 public class WorkspaceTypeUpdater extends AbstractWorkplaceUpdater implements Applyable {
-    public WorkspaceTypeUpdater(Workspace workspace) {
-        super(workspace);
+    public WorkspaceTypeUpdater(int workspaceID) {
+        super(workspaceID);
     }
 
     @Override
     public void apply() {
         System.out.println("Enter workspace type:");
-        this.workspace.setType(MainStorage.scanner.readString());
+        workspaceRepository.updateType(this.workspaceID, MainStorage.scanner.readString());
     }
 
     @Override
