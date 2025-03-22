@@ -1,8 +1,6 @@
 package services.workspaces;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
-import data_storage.Workspaces;
 import repository.WorkspaceRepository;
 import services.workspaces.updaters.WorkspaceAvailabilityUpdater;
 import services.workspaces.updaters.WorkspacePriceUpdater;
@@ -28,7 +26,6 @@ public class WorkspaceCreator implements Applyable {
 
     @Override
     public void apply() {
-        Workspaces workplacesList = MainStorage.workspaces;
         assignWorkspace();
     }
 
