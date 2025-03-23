@@ -1,7 +1,7 @@
 package services.reservations;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
+import UI.utilities.ConsoleScanner;
 import repository.ReservationRepository;
 import repository.WorkspaceRepository;
 
@@ -17,7 +17,7 @@ public class ReservationCanceler implements Applyable {
         System.out.println("Your reservations:");
         new ReservationCustomerViewer(customerName).apply();
         System.out.println("Enter ID:");
-        int reservationID = MainStorage.scanner.readInt();
+        int reservationID = ConsoleScanner.getInstance().readInt();
 
         if (reservationRepository.containsReservation(reservationID)) {
             int workspaceID = reservationRepository.getWorkspaceIDByReservation(reservationID);

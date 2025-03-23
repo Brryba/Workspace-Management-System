@@ -1,7 +1,7 @@
 package services.reservations;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
+import UI.utilities.ConsoleScanner;
 import repository.ReservationRepository;
 import repository.WorkspaceRepository;
 import services.workspaces.AvailableSpacesViewer;
@@ -12,25 +12,27 @@ public class ReservationMaker implements Applyable {
     private final String customer;
     private final ReservationRepository reservationRepository;
     private final WorkspaceRepository workspaceRepository;
+    private final ConsoleScanner scanner;
     public ReservationMaker(String customer) {
         this.customer = customer;
         reservationRepository = ReservationRepository.getInstance();
         workspaceRepository = WorkspaceRepository.getInstance();
+        scanner = ConsoleScanner.getInstance();
     }
 
     private void setReservationDateTime(Reservation reservation) throws DateTimeException {
         System.out.println("Enter reservation start date in dd-mm-yyyy format:");
-        String startDate = MainStorage.scanner.readString();
+        String startDate = scanner.readString();
 
         System.out.println("Enter reservation start time in hh:mm:ss format");
-        String startTime = MainStorage.scanner.readString();
+        String startTime = scanner.readString();
         reservation.setStart(startDate, startTime);
 
         System.out.println("Enter reservation end date in dd-mm-yyyy format:");
-        String endDate = MainStorage.scanner.readString();
+        String endDate = scanner.readString();
 
         System.out.println("Enter reservation end time in hh:mm:ss format");
-        String endTime = MainStorage.scanner.readString();
+        String endTime = scanner.readString();
         reservation.setEnd(endDate, endTime);
     }
 
@@ -39,7 +41,7 @@ public class ReservationMaker implements Applyable {
 
         new AvailableSpacesViewer().apply();
 
-        int workspaceID = MainStorage.scanner.readWorkspaceID();
+        int workspaceID = scanner.readWorkspaceID();
         Reservation reservation = new Reservation(this.customer,
                 workspaceID, WorkspaceRepository.getInstance().getWorkspaceName(workspaceID));
 

@@ -2,7 +2,7 @@ package UI.menus;
 
 import UI.interfaces.Applyable;
 import UI.interfaces.MethodsMenu;
-import data_storage.MainStorage;
+import UI.utilities.ConsoleScanner;
 import repository.WorkspaceRepository;
 import services.workspaces.updaters.WorkspaceAvailabilityUpdater;
 import services.workspaces.updaters.WorkspacePriceUpdater;
@@ -12,7 +12,7 @@ public class WorkspaceUpdateMenu extends AbstractMenu implements Applyable, Meth
     @Override
     protected void setMethods() {
         System.out.println(WorkspaceRepository.getInstance().getAllWorkspaces().toString());
-        int workspaceID = MainStorage.scanner.readWorkspaceID();
+        int workspaceID = ConsoleScanner.getInstance().readWorkspaceID();
         this.addMethod(1, new WorkspaceTypeUpdater(workspaceID));
         this.addMethod(2, new WorkspacePriceUpdater(workspaceID));
         this.addMethod(3, new WorkspaceAvailabilityUpdater(workspaceID));

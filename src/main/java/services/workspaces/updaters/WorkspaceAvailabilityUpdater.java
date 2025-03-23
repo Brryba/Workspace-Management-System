@@ -1,7 +1,6 @@
 package services.workspaces.updaters;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
 
 public class WorkspaceAvailabilityUpdater extends AbstractWorkplaceUpdater implements Applyable {
     public WorkspaceAvailabilityUpdater(int workspaceID) {
@@ -13,7 +12,7 @@ public class WorkspaceAvailabilityUpdater extends AbstractWorkplaceUpdater imple
         System.out.println("Enter availability status [Y/N]");
         String input;
         do {
-            input = MainStorage.scanner.readString().toUpperCase();
+            input = consoleScanner.readString().toUpperCase();
             if (!input.equals("Y") && !input.equals("N")) {
                 System.err.println("Select Y or N");
             }

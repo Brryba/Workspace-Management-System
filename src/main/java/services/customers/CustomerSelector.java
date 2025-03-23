@@ -1,6 +1,6 @@
 package services.customers;
 
-import data_storage.MainStorage;
+import UI.utilities.ConsoleScanner;
 import repository.CustomerRepository;
 
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ public abstract class CustomerSelector {
 
     public static String selectCustomer() {
         System.out.println("Enter your name:");
-        String name = MainStorage.scanner.readString();
+        String name = ConsoleScanner.getInstance().readString();
 
         try {
             if (!customerRepository.hasCustomer(name)) {

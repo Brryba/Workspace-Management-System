@@ -1,7 +1,7 @@
 package services.workspaces;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
+import UI.utilities.ConsoleScanner;
 import repository.WorkspaceRepository;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class WorkspaceRemover implements Applyable {
         List<Workspace> all = repository.getAllWorkspaces();
         System.out.println(all.toString());
 
-        repository.removeWorkspace(MainStorage.scanner.readWorkspaceID());
+        repository.removeWorkspace(ConsoleScanner.getInstance().readWorkspaceID());
     }
 
     @Override
