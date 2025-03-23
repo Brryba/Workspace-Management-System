@@ -2,17 +2,20 @@ package services.reservations;
 
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
-import data_storage.Reservations;
-import data_storage.Workspaces;
+import repository.ReservationRepository;
+import repository.WorkspaceRepository;
 import services.workspaces.AvailableSpacesViewer;
-import services.workspaces.Workspace;
 
 import java.time.DateTimeException;
 
 public class ReservationMaker implements Applyable {
     private final String customer;
+    private final ReservationRepository reservationRepository;
+    private final WorkspaceRepository workspaceRepository;
     public ReservationMaker(String customer) {
         this.customer = customer;
+        reservationRepository = ReservationRepository.getInstance();
+        workspaceRepository = WorkspaceRepository.getInstance();
     }
 
     private void setReservationDateTime(Reservation reservation) throws DateTimeException {
@@ -33,23 +36,19 @@ public class ReservationMaker implements Applyable {
 
     @Override
     public void apply() {
-        Reservations reservationsList = MainStorage.reservations;
-        Workspaces workspacesList = MainStorage.workspaces;
 
         new AvailableSpacesViewer().apply();
 
-        Workspace workspace = workspacesList.getWorkspaceByID(MainStorage.scanner.readWorkspaceID());
+        int workspaceID = MainStorage.scanner.readWorkspaceID();
         Reservation reservation = new Reservation(this.customer,
-                workspace);
-
+                workspaceID, WorkspaceRepository.getInstance().getWorkspaceName(workspaceID));
 
         try {
             setReservationDateTime(reservation);
-            reservationsList.add(reservation);
-            workspace.setAvailable(false);
+            reservationRepository.createReservation(reservation);
+            workspaceRepository.updateAvailable(workspaceID, false);
         } catch (DateTimeException e) {
             System.err.println("Wrong date-time input! Reservation was not done!");
-            workspace.setAvailable(true);
         }
     }
 

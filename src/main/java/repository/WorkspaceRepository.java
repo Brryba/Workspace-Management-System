@@ -102,16 +102,21 @@ public class WorkspaceRepository {
         }
     }
 
-    public boolean containsID(int ID)  {
+    public String getWorkspaceName(int ID)  {
         String query = "SELECT * FROM workspace WHERE ID = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, ID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            resultSet.next();
+            return resultSet.getString("type");
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-            return false;
+            return null;
         }
+    }
+
+    public boolean containsID(int ID)  {
+        return getWorkspaceName(ID) != null;
     }
 }

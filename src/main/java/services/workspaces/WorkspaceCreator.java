@@ -12,11 +12,12 @@ public class WorkspaceCreator implements Applyable {
     private final WorkspaceRepository repository = WorkspaceRepository.getInstance();
 
     private void assignWorkspace() {
-        int workspaceID = 0;
+        int workspaceID;
         try {
             workspaceID = repository.assignWorkspace();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            return;
         }
 
         new WorkspaceTypeUpdater(workspaceID).apply();

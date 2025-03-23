@@ -2,30 +2,27 @@ package services.reservations;
 
 import UI.interfaces.Applyable;
 import data_storage.MainStorage;
-import data_storage.Reservations;
+import repository.ReservationRepository;
+import repository.WorkspaceRepository;
 
 public class ReservationCanceler implements Applyable {
     private final String customerName;
+    private final ReservationRepository reservationRepository = ReservationRepository.getInstance();
     public ReservationCanceler(String customerName) {
         this.customerName = customerName;
     }
 
-    private int readReservationNum() {
-        System.out.println("Open reservation number to cancel:");
-        return MainStorage.scanner.readInt() - 1;
-    }
-
     @Override
     public void apply() {
-        Reservations reservationsList = MainStorage.reservations;
         System.out.println("Your reservations:");
         new ReservationCustomerViewer(customerName).apply();
-        int reservationNum = readReservationNum();
+        System.out.println("Enter ID:");
+        int reservationID = MainStorage.scanner.readInt();
 
-        if (reservationNum >= 0 && reservationNum < reservationsList.size()) {
-            Reservation reservation = reservationsList.get(reservationNum);
-            reservation.getWorkspace().setAvailable(true);
-            reservationsList.remove(reservation);
+        if (reservationRepository.containsReservation(reservationID)) {
+            int workspaceID = reservationRepository.getWorkspaceIDByReservation(reservationID);
+            reservationRepository.deleteReservation(reservationID);
+            WorkspaceRepository.getInstance().updateAvailable(workspaceID, true);
         } else {
             System.err.println("No such reservation!");
         }
