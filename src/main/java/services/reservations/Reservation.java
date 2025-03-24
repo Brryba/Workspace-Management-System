@@ -1,22 +1,23 @@
 package services.reservations;
 
-import services.customers.Customer;
-import services.workspaces.Workspace;
-
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Reservation {
-    private final Customer customer;
-    private final Workspace workspace;
+    private int reservationID;
+    private final String customerName;
+    private final int workspaceID;
+    private final String workspaceType;
     private LocalDateTime start;
     private LocalDateTime end;
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private static final DateTimeFormatter dateTimeFormatter
+            = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-    public Reservation(Customer customer, Workspace workplace) {
-        this.customer = customer;
-        this.workspace = workplace;
-        workplace.setAvailable(false);
+    public Reservation(String customerName, int workplaceID, String workspaceType) {
+        this.customerName = customerName;
+        this.workspaceID = workplaceID;
+        this.workspaceType = workspaceType;
     }
 
     private LocalDateTime parseDateTime(String date, String time) {
@@ -28,27 +29,53 @@ public class Reservation {
         this.start = parseDateTime(date, time);
     }
 
+    public void setStart(Timestamp timestamp) {
+        this.start = timestamp.toLocalDateTime();
+    }
+
+    public void setEnd(Timestamp timestamp) {
+        this.end = timestamp.toLocalDateTime();
+    }
+
     public void setEnd(String date, String time) {
         this.end = parseDateTime(date, time);
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public int getReservationID() {
+        return reservationID;
     }
 
-    public Workspace getWorkspace() {
-        return this.workspace;
+    public void setReservationID(int reservationID) {
+        this.reservationID = reservationID;
+    }
+
+    public String getCustomerName() {
+        return this.customerName;
+    }
+
+    public int getWorkspaceID() {
+        return this.workspaceID;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
     }
 
     @Override
     public String toString() {
-        return "Workplace ID: " + this.workspace.getID() +
+        return "Reservation ID: " + this.reservationID +
+                "\nWorkplace ID: " + this.workspaceID +
+                "\nWorkplace name: " + this.workspaceType +
                 "\nStart Time: " + start.format(dateTimeFormatter) +
                 "\nEnd Time: " + end.format(dateTimeFormatter);
     }
 
     public String toStringAdmin() {
-        return "Customer Name:" + this.customer.getName() +
+        return "Customer Name:" + this.customerName +
                 "\n" + this;
     }
 }

@@ -1,7 +1,6 @@
 package UI.menus;
 
 import UI.interfaces.Applyable;
-import services.customers.Customer;
 import services.customers.CustomerSelector;
 import services.reservations.ReservationCanceler;
 import services.reservations.ReservationCustomerViewer;
@@ -11,11 +10,11 @@ import services.workspaces.AvailableSpacesViewer;
 public class CustomerMenu extends AbstractMenu implements Applyable {
     @Override
     protected void setMethods() {
-        Customer customer = CustomerSelector.selectCustomer();
+        String customerName = CustomerSelector.selectCustomer();
         this.addMethod(1, new AvailableSpacesViewer());
-        this.addMethod(2, new ReservationMaker(customer));
-        this.addMethod(3, new ReservationCustomerViewer(customer));
-        this.addMethod(4, new ReservationCanceler(customer));
+        this.addMethod(2, new ReservationMaker(customerName));
+        this.addMethod(3, new ReservationCustomerViewer(customerName));
+        this.addMethod(4, new ReservationCanceler(customerName));
         this.addMethod(AbstractMenu.QUIT_MENU_METHOD, new MainMenu());
     }
 

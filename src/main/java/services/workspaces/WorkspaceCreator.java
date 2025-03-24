@@ -1,29 +1,33 @@
 package services.workspaces;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
-import data_storage.Workspaces;
+import repository.WorkspaceRepository;
 import services.workspaces.updaters.WorkspaceAvailabilityUpdater;
-import services.workspaces.updaters.WorkspaceIDUpdater;
 import services.workspaces.updaters.WorkspacePriceUpdater;
 import services.workspaces.updaters.WorkspaceTypeUpdater;
 
+import java.sql.SQLException;
+
 public class WorkspaceCreator implements Applyable {
-    private Workspace assignWorkPlace() {
-        Workspace workspace = new Workspace();
+    private final WorkspaceRepository repository = WorkspaceRepository.getInstance();
 
-        new WorkspaceIDUpdater(workspace).apply();
-        new WorkspaceTypeUpdater(workspace).apply();
-        new WorkspacePriceUpdater(workspace).apply();
-        new WorkspaceAvailabilityUpdater(workspace).apply();
+    private void assignWorkspace() {
+        int workspaceID;
+        try {
+            workspaceID = repository.assignWorkspace();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return;
+        }
 
-        return workspace;
+        new WorkspaceTypeUpdater(workspaceID).apply();
+        new WorkspacePriceUpdater(workspaceID).apply();
+        new WorkspaceAvailabilityUpdater(workspaceID).apply();
     }
 
     @Override
     public void apply() {
-        Workspaces workplacesList = MainStorage.workspaces;
-        workplacesList.add(assignWorkPlace());
+        assignWorkspace();
     }
 
     @Override

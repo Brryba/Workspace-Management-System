@@ -1,7 +1,7 @@
 package UI.menus;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
+import UI.utilities.ConsoleScanner;
 
 import java.util.LinkedHashMap;
 
@@ -27,7 +27,7 @@ public abstract class AbstractMenu
         System.out.println("Enter your option here:");
         int methodID;
         do {
-            methodID = MainStorage.scanner.readInt();
+            methodID = ConsoleScanner.getInstance().readInt();
             if (!this.map.containsKey(methodID)) {
                 System.err.println("No such option. Try again:");
             }

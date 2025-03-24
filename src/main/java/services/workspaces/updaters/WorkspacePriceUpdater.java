@@ -1,18 +1,16 @@
 package services.workspaces.updaters;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
-import services.workspaces.Workspace;
 
 public class WorkspacePriceUpdater extends AbstractWorkplaceUpdater implements Applyable {
-    public WorkspacePriceUpdater(Workspace workspace) {
-        super(workspace);
+    public WorkspacePriceUpdater(int workspaceID) {
+        super(workspaceID);
     }
 
     @Override
     public void apply() {
         System.out.println("Enter workspace price:");
-        this.workspace.setPrice(MainStorage.scanner.readDouble());
+        this.workspaceRepository.updatePrice(this.workspaceID, consoleScanner.readDouble());
     }
 
     @Override

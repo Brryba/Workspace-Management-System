@@ -1,25 +1,31 @@
 package services.reservations;
 
 import UI.interfaces.Applyable;
-import data_storage.MainStorage;
-import data_storage.Reservations;
-import services.customers.Customer;
+import repository.ReservationRepository;
 
 public class ReservationCustomerViewer implements Applyable {
-    private final Customer customer;
-    public ReservationCustomerViewer(Customer customer) {
-        this.customer = customer;
+    private final String customerName;
+    private final ReservationRepository reservationRepository =
+            ReservationRepository.getInstance();
+    public ReservationCustomerViewer(String customerName) {
+        this.customerName = customerName;
     }
 
     @Override
     public void apply() {
-        Reservations reservationsList = MainStorage.reservations;
-        int count = 1;
-        for (Reservation reservation : reservationsList) {
-            if (reservation.getCustomer() == customer) {
-                System.out.println(count++ + ") " + reservation);
+        reservationRepository.getCustomerReservations(customerName)
+                .ifPresentOrElse((reservations) -> {
+            if (reservations.isEmpty()) {
+                System.err.println("No reservations found");
+                return;
             }
-        }
+            int count = 1;
+            for (Reservation reservation : reservations) {
+                if (reservation.getCustomerName().equals(customerName)) {
+                    System.out.println(count++ + ") " + reservation);
+                }
+            }
+        }, () -> System.out.println("No reservations found"));
     }
 
     @Override
