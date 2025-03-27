@@ -10,16 +10,9 @@ public abstract class CustomerSelector {
     public static String selectCustomer() {
         System.out.println("Enter your name:");
         String name = ConsoleScanner.getInstance().readString();
-        /*
-        try {
-            if (!customerRepository.hasCustomer(name)) {
-                customerRepository.insertCustomer(name);
-            }
-            return name;
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());;
+        if (customerRepository.findCustomer(name) == null) {
+            customerRepository.insertCustomer(name);
         }
-*/
-        return null;
+        return name;
     }
 }
