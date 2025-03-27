@@ -1,13 +1,16 @@
 package services.reservations;
 
 import JDBCRepository.ReservationRepository;
-import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import UI.utilities.ConsoleScanner;
+import hibernateRepository.WorkspaceHibernateRepository;
+import services.workspaces.Workspace;
 
 public class ReservationCanceler implements Applyable {
     private final String customerName;
     private final ReservationRepository reservationRepository = ReservationRepository.getInstance();
+    private final WorkspaceHibernateRepository workspaceRepository =
+            WorkspaceHibernateRepository.getInstance();
     public ReservationCanceler(String customerName) {
         this.customerName = customerName;
     }
@@ -22,7 +25,9 @@ public class ReservationCanceler implements Applyable {
         if (reservationRepository.containsReservation(reservationID)) {
             int workspaceID = reservationRepository.getWorkspaceIDByReservation(reservationID);
             reservationRepository.deleteReservation(reservationID);
-            WorkspaceRepository.getInstance().updateAvailable(workspaceID, true);
+            Workspace workspace = workspaceRepository.getWorkspace(workspaceID);
+            workspace.setAvailable(true);
+            workspaceRepository.persistWorkspace(workspace);
         } else {
             System.err.println("No such reservation!");
         }

@@ -48,7 +48,8 @@ public class ReservationMaker implements Applyable {
         try {
             setReservationDateTime(reservation);
             reservationRepository.createReservation(reservation);
-            workspaceRepository.updateAvailable(workspaceID, false);
+            //CHANGE IT LATER WITH HIBERNATE
+            //workspaceRepository.updateAvailable(workspaceID, false);
         } catch (DateTimeException e) {
             System.err.println("Wrong date-time input! Reservation was not done!");
         }

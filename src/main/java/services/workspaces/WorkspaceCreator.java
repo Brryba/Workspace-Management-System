@@ -1,28 +1,28 @@
 package services.workspaces;
 
-import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
+import hibernateRepository.WorkspaceHibernateRepository;
+import org.hibernate.HibernateException;
 import services.workspaces.updaters.WorkspaceAvailabilityUpdater;
 import services.workspaces.updaters.WorkspacePriceUpdater;
 import services.workspaces.updaters.WorkspaceTypeUpdater;
 
-import java.sql.SQLException;
-
 public class WorkspaceCreator implements Applyable {
-    private final WorkspaceRepository repository = WorkspaceRepository.getInstance();
+    private final WorkspaceHibernateRepository repository =
+            WorkspaceHibernateRepository.getInstance();
 
     private void assignWorkspace() {
-        int workspaceID;
+        Workspace workspace = new Workspace();
         try {
-            workspaceID = repository.assignWorkspace();
-        } catch (SQLException e) {
+            repository.persistWorkspace(workspace);
+        } catch (HibernateException e) {
             System.err.println(e.getMessage());
             return;
         }
 
-        new WorkspaceTypeUpdater(workspaceID).apply();
-        new WorkspacePriceUpdater(workspaceID).apply();
-        new WorkspaceAvailabilityUpdater(workspaceID).apply();
+        new WorkspaceTypeUpdater(workspace).apply();
+        new WorkspacePriceUpdater(workspace).apply();
+        new WorkspaceAvailabilityUpdater(workspace).apply();
     }
 
     @Override

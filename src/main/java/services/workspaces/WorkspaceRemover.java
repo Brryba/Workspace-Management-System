@@ -1,13 +1,13 @@
 package services.workspaces;
 
-import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import UI.utilities.ConsoleScanner;
+import hibernateRepository.WorkspaceHibernateRepository;
 
 import java.util.List;
 
 public class WorkspaceRemover implements Applyable {
-    private final WorkspaceRepository repository = WorkspaceRepository.getInstance();
+    private final WorkspaceHibernateRepository repository = WorkspaceHibernateRepository.getInstance();
 
     @Override
     public void apply() {

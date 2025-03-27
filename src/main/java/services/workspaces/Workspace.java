@@ -1,13 +1,20 @@
 package services.workspaces;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Entity
+@Table(name = "workspace")
 public class Workspace implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int ID;
     private String type;
     private BigDecimal price;
+    @Column(columnDefinition = "true")
     private boolean isAvailable = true;
 
     public void setID(int ID) {
