@@ -1,4 +1,4 @@
-package repository;
+package JDBCRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,16 +20,18 @@ public class CustomerRepository {
 
     public void insertCustomer(String name) throws SQLException {
         String query = "INSERT INTO customer VALUES (?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, name);
-        preparedStatement.executeUpdate();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);){
+            preparedStatement.setString(1, name);
+            preparedStatement.executeUpdate();
+        }
     }
 
     public boolean hasCustomer(String name) throws SQLException {
         String query = "SELECT * FROM customer WHERE name = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, name);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet.next();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);){
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        }
     }
 }

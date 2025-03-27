@@ -1,4 +1,4 @@
-package repository;
+package JDBCRepository;
 
 import data_storage.Workspaces;
 import services.workspaces.Workspace;
@@ -25,17 +25,17 @@ public class WorkspaceRepository {
 
     public int assignWorkspace() throws SQLException {
         String query = "INSERT INTO workspace () VALUES ()";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.executeUpdate();
-        ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        return resultSet.getInt("ID");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            return resultSet.getInt("ID");
+        }
     }
 
     public Workspaces getAllWorkspaces() {
         String query = "SELECT * FROM workspace";
         ResultSet resultSet;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
             preparedStatement.executeQuery();
             resultSet = preparedStatement.getResultSet();
             Workspaces workspaces = new Workspaces();
@@ -55,9 +55,8 @@ public class WorkspaceRepository {
     }
 
     public void updateType(int id, String newType) {
-        try {
-            String query = "UPDATE workspace SET Type = ? WHERE ID = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        String query = "UPDATE workspace SET Type = ? WHERE ID = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
             preparedStatement.setString(1, newType);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -68,9 +67,8 @@ public class WorkspaceRepository {
 
     public void updatePrice(int id, double newPrice) {
         BigDecimal decimalPrice = new BigDecimal(newPrice).setScale(2, RoundingMode.HALF_DOWN);
-        try {
-            String query = "UPDATE workspace SET price = ? WHERE ID = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        String query = "UPDATE workspace SET price = ? WHERE ID = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
             preparedStatement.setString(1, decimalPrice.toString());
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -80,9 +78,8 @@ public class WorkspaceRepository {
     }
 
     public void updateAvailable(int id, boolean isAvailable) {
-        try {
-            String query = "UPDATE workspace SET IsAvailable = ? WHERE ID = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        String query = "UPDATE workspace SET IsAvailable = ? WHERE ID = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setBoolean(1, isAvailable);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -92,9 +89,8 @@ public class WorkspaceRepository {
     }
 
     public void removeWorkspace(int ID)  {
-        try {
-            String query = "DELETE FROM workspace WHERE ID = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
+        String query = "DELETE FROM workspace WHERE ID = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)){
             statement.setString(1, String.valueOf(ID));
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -104,8 +100,7 @@ public class WorkspaceRepository {
 
     public String getWorkspaceName(int ID)  {
         String query = "SELECT * FROM workspace WHERE ID = ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);){
             preparedStatement.setInt(1, ID);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();

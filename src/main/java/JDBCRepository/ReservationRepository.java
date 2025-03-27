@@ -1,4 +1,4 @@
-package repository;
+package JDBCRepository;
 
 import data_storage.Reservations;
 import services.reservations.Reservation;
@@ -62,8 +62,7 @@ public class ReservationRepository {
     public Optional<Reservations> getCustomerReservations(String customerName) {
         String query = "SELECT * FROM reservation JOIN workspace ON" +
                 " workspace_id = workspace.ID WHERE customer_name=?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (PreparedStatement statement = connection.prepareStatement(query);){
             statement.setString(1, customerName);
             ResultSet resultSet = statement.executeQuery();
             return Optional.of(parseReservations(resultSet));
@@ -75,8 +74,7 @@ public class ReservationRepository {
 
     public boolean containsReservation(int reservationID) {
         String query = "SELECT * FROM reservation WHERE id=?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (PreparedStatement statement = connection.prepareStatement(query);){
             statement.setInt(1, reservationID);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
@@ -88,8 +86,7 @@ public class ReservationRepository {
 
     public void deleteReservation(int reservationID) {
         String query = "DELETE FROM reservation WHERE id=?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (PreparedStatement statement = connection.prepareStatement(query);){
             statement.setInt(1, reservationID);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -99,8 +96,7 @@ public class ReservationRepository {
 
     public int getWorkspaceIDByReservation(int reservationID) {
         String query = "SELECT workspace_id FROM reservation WHERE id=?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (PreparedStatement statement = connection.prepareStatement(query);){
             statement.setInt(1, reservationID);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
