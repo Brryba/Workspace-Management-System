@@ -1,9 +1,9 @@
 package services.reservations;
 
+import JDBCRepository.ReservationRepository;
+import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import UI.utilities.ConsoleScanner;
-import repository.ReservationRepository;
-import repository.WorkspaceRepository;
 
 public class ReservationCanceler implements Applyable {
     private final String customerName;

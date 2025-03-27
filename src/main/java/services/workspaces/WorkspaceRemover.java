@@ -1,8 +1,8 @@
 package services.workspaces;
 
+import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import UI.utilities.ConsoleScanner;
-import repository.WorkspaceRepository;
 
 import java.util.List;
 

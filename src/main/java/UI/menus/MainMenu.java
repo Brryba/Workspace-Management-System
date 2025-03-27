@@ -1,7 +1,7 @@
 package UI.menus;
 
+import JDBCRepository.DataBaseConnector;
 import UI.interfaces.Applyable;
-import repository.DataBaseConnector;
 
 public class MainMenu extends AbstractMenu implements Applyable {
     @Override

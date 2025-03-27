@@ -1,9 +1,9 @@
 package UI.menus;
 
+import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import UI.interfaces.MethodsMenu;
 import UI.utilities.ConsoleScanner;
-import repository.WorkspaceRepository;
 import services.workspaces.updaters.WorkspaceAvailabilityUpdater;
 import services.workspaces.updaters.WorkspacePriceUpdater;
 import services.workspaces.updaters.WorkspaceTypeUpdater;

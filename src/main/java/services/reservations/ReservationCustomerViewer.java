@@ -1,7 +1,7 @@
 package services.reservations;
 
+import JDBCRepository.ReservationRepository;
 import UI.interfaces.Applyable;
-import repository.ReservationRepository;
 
 public class ReservationCustomerViewer implements Applyable {
     private final String customerName;

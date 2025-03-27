@@ -1,6 +1,6 @@
 package UI.utilities;
 
-import repository.WorkspaceRepository;
+import JDBCRepository.WorkspaceRepository;
 
 import java.util.Scanner;
 

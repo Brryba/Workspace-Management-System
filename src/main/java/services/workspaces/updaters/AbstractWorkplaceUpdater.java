@@ -1,8 +1,8 @@
 package services.workspaces.updaters;
 
+import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import UI.utilities.ConsoleScanner;
-import repository.WorkspaceRepository;
 
 public abstract class AbstractWorkplaceUpdater implements Applyable {
     protected final int workspaceID;

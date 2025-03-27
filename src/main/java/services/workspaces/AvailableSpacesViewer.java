@@ -1,8 +1,8 @@
 package services.workspaces;
 
+import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import data_storage.Workspaces;
-import repository.WorkspaceRepository;
 
 public class AvailableSpacesViewer implements Applyable {
     private final WorkspaceRepository repository = WorkspaceRepository.getInstance();

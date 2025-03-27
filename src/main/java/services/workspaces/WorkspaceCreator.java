@@ -1,7 +1,7 @@
 package services.workspaces;
 
+import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
-import repository.WorkspaceRepository;
 import services.workspaces.updaters.WorkspaceAvailabilityUpdater;
 import services.workspaces.updaters.WorkspacePriceUpdater;
 import services.workspaces.updaters.WorkspaceTypeUpdater;
