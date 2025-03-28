@@ -1,19 +1,19 @@
 package services.reservations;
 
-import JDBCRepository.ReservationRepository;
 import UI.interfaces.Applyable;
+import hibernateRepository.ReservationHibernateRepository;
 
 public class ReservationCustomerViewer implements Applyable {
     private final String customerName;
-    private final ReservationRepository reservationRepository =
-            ReservationRepository.getInstance();
+    private final ReservationHibernateRepository reservationRepository =
+            ReservationHibernateRepository.getInstance();
     public ReservationCustomerViewer(String customerName) {
         this.customerName = customerName;
     }
 
     @Override
     public void apply() {
-        reservationRepository.getCustomerReservations(customerName)
+        reservationRepository.getReservations(customerName)
                 .ifPresentOrElse((reservations) -> {
             if (reservations.isEmpty()) {
                 System.err.println("No reservations found");

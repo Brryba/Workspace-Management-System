@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 @Table(name = "workspace")
 public class Workspace implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
     private String type;
     private BigDecimal price;

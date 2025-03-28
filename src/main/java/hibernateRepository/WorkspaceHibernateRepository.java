@@ -34,6 +34,10 @@ public class WorkspaceHibernateRepository {
         return this.entityManager.find(Workspace.class, workspaceID);
     }
 
+    public boolean containsWorkspace(int workspaceID) {
+        return getWorkspace(workspaceID) != null;
+    }
+
     public Workspaces getAllWorkspaces() {
         Query query = this.entityManager.createQuery("from Workspace");
         return new Workspaces(query.getResultList());

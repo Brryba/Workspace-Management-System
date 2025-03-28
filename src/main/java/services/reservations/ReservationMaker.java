@@ -1,21 +1,21 @@
 package services.reservations;
 
-import JDBCRepository.ReservationRepository;
 import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import UI.utilities.ConsoleScanner;
+import hibernateRepository.ReservationHibernateRepository;
 import services.workspaces.AvailableSpacesViewer;
 
 import java.time.DateTimeException;
 
 public class ReservationMaker implements Applyable {
     private final String customer;
-    private final ReservationRepository reservationRepository;
+    private final ReservationHibernateRepository reservationRepository;
     private final WorkspaceRepository workspaceRepository;
     private final ConsoleScanner scanner;
     public ReservationMaker(String customer) {
         this.customer = customer;
-        reservationRepository = ReservationRepository.getInstance();
+        reservationRepository = ReservationHibernateRepository.getInstance();
         workspaceRepository = WorkspaceRepository.getInstance();
         scanner = ConsoleScanner.getInstance();
     }
@@ -47,7 +47,7 @@ public class ReservationMaker implements Applyable {
 
         try {
             setReservationDateTime(reservation);
-            reservationRepository.createReservation(reservation);
+            reservationRepository.insertReservation(reservation);
             //CHANGE IT LATER WITH HIBERNATE
             //workspaceRepository.updateAvailable(workspaceID, false);
         } catch (DateTimeException e) {

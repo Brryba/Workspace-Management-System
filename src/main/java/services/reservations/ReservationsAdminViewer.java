@@ -1,21 +1,22 @@
 package services.reservations;
 
-import JDBCRepository.ReservationRepository;
 import UI.interfaces.Applyable;
+import hibernateRepository.ReservationHibernateRepository;
 
 public class ReservationsAdminViewer implements Applyable {
-    private final ReservationRepository reservationRepository;
+    private final ReservationHibernateRepository reservationRepository;
 
     public ReservationsAdminViewer() {
-        this.reservationRepository = ReservationRepository.getInstance();
+        this.reservationRepository =
+                ReservationHibernateRepository.getInstance();
     }
 
     @Override
     public void apply() {
-        reservationRepository.getAllReservations()
-                .ifPresentOrElse(System.out::println, () -> {
-            System.out.println("No Reservations Found");
-        });
+        reservationRepository.getReservations()
+                .ifPresentOrElse((reservations) -> {
+                    System.out.println(reservations.toStringAdmin());
+                }, () -> System.out.println("No Reservations Found"));
     }
 
     @Override

@@ -1,14 +1,24 @@
 package services.reservations;
 
+import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Entity
+@Table(name = "reservation")
 public class Reservation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_id")
     private int reservationID;
-    private final String customerName;
-    private final int workspaceID;
-    private final String workspaceType;
+    @Column(name = "customer_name")
+    private String customerName;
+    @Column(name = "workspace_id")
+    private int workspaceID;
+    @Column(name = "workspace_type")
+    private String workspaceType;
     private LocalDateTime start;
     private LocalDateTime end;
     private static final DateTimeFormatter dateTimeFormatter
@@ -18,6 +28,10 @@ public class Reservation {
         this.customerName = customerName;
         this.workspaceID = workplaceID;
         this.workspaceType = workspaceType;
+    }
+
+    public Reservation() {
+
     }
 
     private LocalDateTime parseDateTime(String date, String time) {
