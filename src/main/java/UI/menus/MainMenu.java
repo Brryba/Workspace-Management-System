@@ -1,7 +1,7 @@
 package UI.menus;
 
 import UI.interfaces.Applyable;
-import repository.DataBaseConnector;
+import hibernateRepository.HibernateUtil;
 
 public class MainMenu extends AbstractMenu implements Applyable {
     @Override
@@ -17,10 +17,9 @@ public class MainMenu extends AbstractMenu implements Applyable {
 }
 
 class Quit implements Applyable {
-    private static final String DEFAULT_FILE_NAME = "/workspaces.ws";
     @Override
     public void apply() {
-        DataBaseConnector.getInstance().closeConnection();
+        HibernateUtil.close();
     }
 
     @Override

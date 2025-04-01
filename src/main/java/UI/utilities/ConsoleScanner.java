@@ -1,6 +1,6 @@
 package UI.utilities;
 
-import repository.WorkspaceRepository;
+import hibernateRepository.WorkspaceHibernateRepository;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class ConsoleScanner {
     }
 
     private final Scanner scanner = new Scanner(System.in);
-    private final WorkspaceRepository workspaceRepository = WorkspaceRepository.getInstance();
+    private final WorkspaceHibernateRepository workspaceRepository = WorkspaceHibernateRepository.getInstance();
 
     public int readInt() {
         int input;
@@ -30,7 +30,7 @@ public class ConsoleScanner {
         System.out.println("Select workspace ID:");
         do {
             int workspaceID = readInt();
-            if (workspaceRepository.containsID(workspaceID)) {
+            if (workspaceRepository.containsWorkspace(workspaceID)) {
                 return workspaceID;
             } else {
                 System.err.println("No such workspace! Try again:");

@@ -2,13 +2,15 @@ package services.workspaces.updaters;
 
 import UI.interfaces.Applyable;
 import UI.utilities.ConsoleScanner;
-import repository.WorkspaceRepository;
+import hibernateRepository.WorkspaceHibernateRepository;
+import services.workspaces.Workspace;
 
 public abstract class AbstractWorkplaceUpdater implements Applyable {
-    protected final int workspaceID;
-    protected final WorkspaceRepository workspaceRepository = WorkspaceRepository.getInstance();
+    protected final Workspace workspace;
+    protected final WorkspaceHibernateRepository workspaceRepository =
+            WorkspaceHibernateRepository.getInstance();
     protected final ConsoleScanner consoleScanner = ConsoleScanner.getInstance();
-    public AbstractWorkplaceUpdater(int workspaceID) {
-        this.workspaceID = workspaceID;
+    public AbstractWorkplaceUpdater(Workspace workspace) {
+        this.workspace = workspace;
     }
 }

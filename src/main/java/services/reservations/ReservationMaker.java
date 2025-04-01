@@ -1,22 +1,24 @@
 package services.reservations;
 
+import JDBCRepository.WorkspaceRepository;
 import UI.interfaces.Applyable;
 import UI.utilities.ConsoleScanner;
-import repository.ReservationRepository;
-import repository.WorkspaceRepository;
+import hibernateRepository.ReservationHibernateRepository;
+import hibernateRepository.WorkspaceHibernateRepository;
 import services.workspaces.AvailableSpacesViewer;
+import services.workspaces.Workspace;
 
 import java.time.DateTimeException;
 
 public class ReservationMaker implements Applyable {
     private final String customer;
-    private final ReservationRepository reservationRepository;
-    private final WorkspaceRepository workspaceRepository;
+    private final ReservationHibernateRepository reservationRepository;
+    private final WorkspaceHibernateRepository workspaceRepository;
     private final ConsoleScanner scanner;
     public ReservationMaker(String customer) {
         this.customer = customer;
-        reservationRepository = ReservationRepository.getInstance();
-        workspaceRepository = WorkspaceRepository.getInstance();
+        reservationRepository = ReservationHibernateRepository.getInstance();
+        workspaceRepository = WorkspaceHibernateRepository.getInstance();
         scanner = ConsoleScanner.getInstance();
     }
 
@@ -47,8 +49,10 @@ public class ReservationMaker implements Applyable {
 
         try {
             setReservationDateTime(reservation);
-            reservationRepository.createReservation(reservation);
-            workspaceRepository.updateAvailable(workspaceID, false);
+            reservationRepository.insertReservation(reservation);
+            Workspace workspace = workspaceRepository.getWorkspace(workspaceID);
+            workspace.setAvailable(false);
+            workspaceRepository.persistWorkspace(workspace);
         } catch (DateTimeException e) {
             System.err.println("Wrong date-time input! Reservation was not done!");
         }

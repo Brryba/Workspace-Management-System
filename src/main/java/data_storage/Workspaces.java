@@ -4,6 +4,7 @@ import services.workspaces.Workspace;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Workspaces extends ArrayList<Workspace> implements Serializable {
     public Workspace getWorkspaceByID(int workspaceID) {
@@ -24,5 +25,13 @@ public class Workspaces extends ArrayList<Workspace> implements Serializable {
             sb.append(workspace.toString()).append("\n");
         }
         return sb.toString();
+    }
+
+    public Workspaces(List<Workspace> workspaces) {
+        super(workspaces);
+    }
+
+    public Workspaces() {
+        super();
     }
 }
